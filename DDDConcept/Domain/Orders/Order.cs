@@ -1,5 +1,4 @@
 using Domain.Customers;
-using Domain.Products;
 
 namespace Domain.Orders;
 
@@ -13,7 +12,7 @@ public sealed class Order
     }
     public OrderId Id { get; private set; }
     public CustomerId CustomerId { get; private set; }
-
+    public IReadOnlyList<LineItem> LineItems => _lineItems.ToList();
     public void Add(ProductId productId, Money price)
     {
         var lineItem = new LineItem(new LineItemId(Guid.NewGuid()), Id, productId, price);
